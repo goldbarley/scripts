@@ -17,7 +17,15 @@ tmux_exec()
 
 get_dotnet()
 {
-	_dotnet_dir="$SCRIPT_DIR/.dotnet-runtime-9.0.15"
+	_dotnet_dir="$SCRIPT_DIR/.dotnet-runtime-9.0.15";
+
+	if [ -d "$_dotnet_dir" ]; then
+		if ! rm -rf "$_dotnet_dir" > /dev/null 2>&1; then
+			printf "Failed to remove directory: '%s'\n" "$_dotnet_dir"
+			exit 1
+		fi
+	fi
+
 	if ! mkdir -p "$_dotnet_dir"; then
 		printf "Failed to create directory: %s\n" "$_dotnet_dir"
 	fi
