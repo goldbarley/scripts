@@ -1,0 +1,110 @@
+.TH "hwcfg" "1" "04 May 2026" "1.0.0" "HwCfg manual"
+.SH NAME
+hwcfg \- A hardware configuration too.
+.SH SYNOPSIS
+.B hwcfg \fIOPTIONS\fR
+.SH DESCRIPTION
+\fBhwcfg\fR is a hardware configuration tool. It has some very specific
+functions.
+.IP \(bu 4
+You can change your CPU thermal and power limits. If done correctly
+this can prevent throttling which can lead to logetivity of your
+components.
+.IP \(bu 4
+You can change your GPU clocks. This is to prevent your GPU from
+over working when it clearly does not need to.
+.IP \(bu 4
+You can load kernel modules as long as they are already present in the DKMS
+source.
+.IP \(bu 4
+A bit out of scope, but something extra: if you have DuckDNS, you can
+update to synchronise your I. P. address with your DNS.
+.PP
+A configuration file at the location \fB/etc/hwcfg.conf\fR is recommended,
+albeit not mandatory to have.
+.SH OPTIONS
+.TP
+.B install
+This will require some of the high-level dependencies that might otherwise not
+be available on most package managers. These include: \fIRyzenAdj\fR,
+\fIryzen_smu\fR, and \fIacer-wmi-battery\fR (only required for acer laptops).
+.TP
+.B --gaming
+If a configuration file is not found, default values will be used for the
+following:
+.IP \(bu 4
+\fBGPU_CLOCK_FREQ\fR=1200
+.IP \(bu 4
+\fBCPU_TDP\fR=25000
+.IP \(bu 4
+\fRCPU_TDP_FAST\fR=30000
+.IP \(bu 4
+\fBCPU_TEMP_LIMIT\fR=70
+.IP \(bu 4
+\fBAMD_PSTATE_STATUS\fR=passive
+.PP The units of the aforementioned respectively are Megahertz (MHz),
+.TP
+.B --server-host
+If a configuration file is not found, default values will be used for the
+following
+.IP \(bu 4
+\fBGPU_CLOCK_FREQ\fR=400
+.IP \(bu 4
+\fBCPU_TDP\fR=15000
+.IP \(bu 4
+\fRCPU_TDP_FAST\fR=17000
+.IP \(bu 4
+\fBCPU_TEMP_LIMIT\fR=60
+.IP \(bu 4
+\fBAMD_PSTATE_STATUS\fR=passive
+.TP
+.B --game-server-host
+If a configuration file is not found, the default values will be used for the
+following
+.IP \(bu 4
+\fBGPU_CLOCK_FREQ\fR=1200
+.IP \(bu 4
+\fBCPU_TDP\fR=25000
+.IP \(bu 4
+\fRCPU_TDP_FAST\fR=30000
+.IP \(bu 4
+\fBCPU_TEMP_LIMIT\fR=70
+.IP \(bu 4
+\fBAMD_PSTATE_STATUS\fR=passive
+.TP
+milliwatts (mW), milliwatts(mW), Celcius (\(deC), and just a string.
+.B --update-ddns
+This option will update to syncrhonize your DNS to your current I. P. address.
+.TP
+.B --load-kmod <module>
+So long as a kernel module is present in the \fIdkms\fR source tree, it will be
+loaded by this command.
+.TP
+.B --battery-health <mode>
+This only applies to Acer laptops, but this will limit your battery charging to
+80%, preventing your battery from degrading faster.
+.TP
+.B --reset-battery-health
+This is the same as using \fB--battery-health 0\fR. This will set your battery
+health mode to the default value.
+.SH EXIT STATUS
+The command will return either \fB0\fR on success or \fB1\fR on failure.
+.SH AUTHOR
+Written by \fINilabhro Mondal\fR.
+.SH ISSUES
+Reporting any issues or bugs shall be done by the project's issue tracker.
+.SH LICENSE
+Published under the \fIMIT License\fR.
+.SH SEE ALSO
+.IP \(bu 4
+.B curl(1)
+.IP \(bu 4
+.B dkms(8)
+.IP \(bu 4
+.B git(1)
+.IP \(bu 4
+.B modprobe(8)
+.IP \(bu 4
+.B nvidia-smi(1)
+.IP \(bu 4
+.B PKFCONF(1)
