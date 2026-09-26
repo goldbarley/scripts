@@ -95,7 +95,6 @@ func creatproj_c(projname string) int {
 	source := mfcntl.Open(srcfilepath,
 			      os.O_WRONLY | os.O_CREATE | os.O_TRUNC)
 	if source == nil {
-		header.Close()
 		fmt.Fprintf(os.Stderr, "Error: Could not open file: %s\n.",
 			    srcfilepath)
 		return -1
