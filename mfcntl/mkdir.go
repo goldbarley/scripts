@@ -1,15 +1,10 @@
 package mfcntl
 
-import (
-	"fmt"
-	"os"
-)
+import "os"
 
 func Mkdir(dirname string) int {
 	err := os.Mkdir(dirname, 0755)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error: Could not create directory: %s\n",
-			    dirname)
 		return -1
 	}
 
@@ -19,8 +14,6 @@ func Mkdir(dirname string) int {
 func MkdirAll(dirname string) int {
 	err := os.MkdirAll(dirname, 0755)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error: Could not create directories: %s\n",
-			    dirname)
 		return -1
 	}
 
